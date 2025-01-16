@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      containers:
+      - name: vaultwarden
+        image: vaultwarden/server:1.30.5-alpine
+        envFrom:
+        - configMapRef:
+            name: vaultwarden-config
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+        - mountPath: /etc/vaultwarden
+          name: vaultwarden-data
+        - mountPath: /var/log/vaultwarden
+          name: vaultwarden-logs
+      volumes:
+      - name: vaultwarden-data
+        persistentVolumeClaim:
+          claimName: vaultwarden-data-pv-claim
+      - name: vaultwarden-logs
+        persistentVolumeClaim:
+          claimName: vaultwarden-logs-pv-claim
+
+        

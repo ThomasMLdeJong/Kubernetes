@@ -1,0 +1,9 @@
+dependencies:
+- name: vaultwarden
+  repository: file://./charts/vaultwarden/
+  version: 1.0.0
+- name: database
+  repository: file://./charts/database/
+  version: 1.0.0
+digest: sha256:14241acf25a377b58c2e866c2a6c3bcff53b68c35fbda9ce31b834be46ff3e44
+generated: "2024-06-03T15:00:45.080800354+02:00"
