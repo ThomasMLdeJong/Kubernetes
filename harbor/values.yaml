@@ -102,7 +102,7 @@ externalURL: https://harbor.thomasmldejong.nl
 ##
 proxy:
   httpProxy: ""
-  httpsProxy: "harbor.thomasmldejong.nl"
+  httpsProxy: ""
   noProxy: 127.0.0.1,localhost,.local,.internal
   components:
     - core
@@ -141,13 +141,13 @@ ipFamily:
 ## Use "proxy" to use a deploy NGINX proxy in front of Harbor services
 ## Use "ingress" to use an Ingress Controller as proxy
 ##
-exposureType: proxy
+exposureType: ingress
 ## Service parameters
 ##
 service:
   ## @param service.type NGINX proxy service type
   ##
-  type: ClusterIP
+  type: LoadBalancer
   ## @param service.ports.http NGINX proxy service HTTP port
   ## @param service.ports.https NGINX proxy service HTTPS port
   ##
@@ -208,7 +208,7 @@ ingress:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: "nginx"
     ## @param ingress.core.pathType Ingress path type
     ##
     pathType: ImplementationSpecific
@@ -223,7 +223,7 @@ ingress:
     controller: default
     ## @param ingress.core.hostname Default host for the ingress record
     ##
-    hostname: core.harbor.domain
+    hostname: harbor.thomasmldejong.nl
     ## @param ingress.core.annotations [object] Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## Use this parameter to set the required annotations for cert-manager, see
     ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations

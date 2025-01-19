@@ -49,4 +49,3 @@ spec:
   - hosts:
     - argocd.thomasmldejong.nl
     secretName: argocd-server-tls
----
