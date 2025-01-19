@@ -22,7 +22,7 @@ global:
   ##
   security:
     ## @param global.security.allowInsecureImages Allows skipping image verification
-    allowInsecureImages: false
+    allowInsecureImages: true
   ## Compatibility adaptations for Kubernetes platforms
   ##
   compatibility:
@@ -65,10 +65,10 @@ extraDeploy: []
 ## @param image.debug Specify if debug logs should be enabled
 ##
 image:
-  registry: 135.236.90.21
-  repository: moodle-moodle
-  tag: v0.0.1
-  digest: ""
+  registry: harbor.thomasmldejong.nl
+  repository: moodle/moodle
+  tag: 0.0.1
+  digest: "sha256:6a30a71f3c72489e1b337cf721a19a63a71a49830f77f2e14272761be14db4ef"
   ## Specify a imagePullPolicy
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
   ##
@@ -80,7 +80,8 @@ image:
   ## pullSecrets:
   ##   - myRegistryKeySecretName
   ##
-  pullSecrets: []
+  PullSecrets:
+    - name: harbor-password
   ## Set to true if you would like to see extra information on logs
   ##
   debug: false
