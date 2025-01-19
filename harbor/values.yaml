@@ -78,7 +78,7 @@ diagnosticMode:
 
 ## @param adminPassword The initial password of Harbor admin. Change it from portal after launching Harbor
 ##
-adminPassword: ""
+adminPassword: "Buurman"
 ## @param externalURL The external URL for Harbor Core service
 ## It is used to
 ## 1) populate the docker/helm commands showed on portal
@@ -102,7 +102,7 @@ externalURL: https://harbor.thomasmldejong.nl
 ##
 proxy:
   httpProxy: ""
-  httpsProxy: ""
+  httpsProxy: "harbor.thomasmldejong.nl"
   noProxy: 127.0.0.1,localhost,.local,.internal
   components:
     - core
@@ -141,13 +141,13 @@ ipFamily:
 ## Use "proxy" to use a deploy NGINX proxy in front of Harbor services
 ## Use "ingress" to use an Ingress Controller as proxy
 ##
-exposureType: ingress
+exposureType: proxy
 ## Service parameters
 ##
 service:
   ## @param service.type NGINX proxy service type
   ##
-  type: LoadBalancer
+  type: ClusterIP
   ## @param service.ports.http NGINX proxy service HTTP port
   ## @param service.ports.https NGINX proxy service HTTPS port
   ##
@@ -208,7 +208,7 @@ ingress:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: "nginx"
+    ingressClassName: ""
     ## @param ingress.core.pathType Ingress path type
     ##
     pathType: ImplementationSpecific
@@ -223,7 +223,7 @@ ingress:
     controller: default
     ## @param ingress.core.hostname Default host for the ingress record
     ##
-    hostname: harbor.thomasmldejong.nl
+    hostname: core.harbor.domain
     ## @param ingress.core.annotations [object] Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## Use this parameter to set the required annotations for cert-manager, see
     ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
@@ -233,7 +233,6 @@ ingress:
     ##   cert-manager.io/cluster-issuer: cluster-issuer-name
     ##
     annotations:
-      kubernetes.io/ingress.class: nginx
       ingress.kubernetes.io/ssl-redirect: "true"
       ingress.kubernetes.io/proxy-body-size: "0"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -627,7 +626,7 @@ volumePermissions:
   image:
     registry: docker.io
     repository: bitnami/os-shell
-    tag: 12-debian-12-r35
+    tag: 12-debian-12-r34
     digest: ""
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
@@ -682,7 +681,7 @@ nginx:
   image:
     registry: docker.io
     repository: bitnami/nginx
-    tag: 1.27.3-debian-12-r5
+    tag: 1.27.3-debian-12-r2
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1057,7 +1056,7 @@ portal:
   image:
     registry: docker.io
     repository: bitnami/harbor-portal
-    tag: 2.12.2-debian-12-r0
+    tag: 2.12.1-debian-12-r3
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1426,7 +1425,7 @@ core:
   image:
     registry: docker.io
     repository: bitnami/harbor-core
-    tag: 2.12.2-debian-12-r1
+    tag: 2.12.1-debian-12-r0
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1857,7 +1856,7 @@ jobservice:
   image:
     registry: docker.io
     repository: bitnami/harbor-jobservice
-    tag: 2.12.2-debian-12-r1
+    tag: 2.12.1-debian-12-r0
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2516,7 +2515,7 @@ registry:
     image:
       registry: docker.io
       repository: bitnami/harbor-registry
-      tag: 2.12.2-debian-12-r1
+      tag: 2.12.1-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2687,7 +2686,7 @@ registry:
     image:
       registry: docker.io
       repository: bitnami/harbor-registryctl
-      tag: 2.12.2-debian-12-r1
+      tag: 2.12.1-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2852,7 +2851,7 @@ trivy:
   image:
     registry: docker.io
     repository: bitnami/harbor-adapter-trivy
-    tag: 2.12.2-debian-12-r0
+    tag: 2.12.1-debian-12-r0
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -3273,7 +3272,7 @@ exporter:
   image:
     registry: docker.io
     repository: bitnami/harbor-exporter
-    tag: 2.12.2-debian-12-r1
+    tag: 2.12.1-debian-12-r0
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -3628,7 +3627,7 @@ postgresql:
   image:
     registry: docker.io
     repository: bitnami/postgresql
-    tag: 14.15.0-debian-12-r8
+    tag: 14.15.0-debian-12-r6
     digest: ""
   auth:
     enablePostgresUser: true
