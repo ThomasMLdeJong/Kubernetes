@@ -102,7 +102,7 @@ externalURL: https://harbor.thomasmldejong.nl
 ##
 proxy:
   httpProxy: ""
-  httpsProxy: ""
+  httpsProxy: "harbor.thomasmldejong.nl"
   noProxy: 127.0.0.1,localhost,.local,.internal
   components:
     - core
