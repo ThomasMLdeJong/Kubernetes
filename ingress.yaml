@@ -1,16 +1,39 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-ingress
-  namespace: argocd
+  name: vaultwarden-ingress
+  namespace: vaultwarden
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - argocd.thomasmldejong.nl
-    secretName: argocd-tls
+    - vaultwarden.thomasmldejong.nl
+    secretName: vaultwarden-tls
+  rules:
+  - host: vaultwarden.thomasmldejong.nl
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vaultwarden
+            port:
+              number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
   rules:
   - host: argocd.thomasmldejong.nl
     http:
@@ -21,4 +44,9 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 443
+              name: https
+  tls:
+  - hosts:
+    - argocd.thomasmldejong.nl
+    secretName: argocd-server-tls
+---
