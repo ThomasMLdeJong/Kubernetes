@@ -116,7 +116,7 @@ moodleSkipInstall: false
 ## @param moodleSiteName Site name
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/moodle#configuration
 ##
-moodleSiteName: "moodle.thomasmldejong.nl"
+moodleSiteName: "Ijsselstreek University"
 ## @param moodleLang Site language
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/moodle#configuration
 ##
@@ -129,7 +129,7 @@ moodleUsername: Ijsselstreek
 ## Defaults to a random 10-character alphanumeric string if not set
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/moodle#configuration
 ##
-moodlePassword: ""
+moodlePassword: "Buurman"
 ## @param moodleEmail Admin email
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/moodle#configuration
 ##
